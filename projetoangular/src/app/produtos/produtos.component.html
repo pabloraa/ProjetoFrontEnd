@@ -1,5 +1,8 @@
 <div class="container">
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <button mat-button color="primary" (click)="openDialog(null)">Adicionar Produto</button>
+  
+<table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -43,10 +46,10 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let element">  
-            <button mat-icon-button color="primary">
+            <button mat-icon-button color="primary" (click)="openDialog(null)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button color="primary">
+              <button mat-icon-button color="primary" (click)="openDialog(null)">
                 <mat-icon>delete</mat-icon>
               </button>
         </td>

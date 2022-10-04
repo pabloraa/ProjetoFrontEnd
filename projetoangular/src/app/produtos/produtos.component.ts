@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
+import { ElementDialogComponent } from './element-dialog/element-dialog.component';
 export interface PeriodicElement {
   categoria: number;
   descricao: string;
@@ -18,12 +21,37 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./produtos.component.css']
 })
 export class ProdutosComponent implements OnInit {
+  @ViewChild(MatTable)
+  table!: MatTable<any>;
   displayedColumns: string[] = ['categoria', 'descricao', 'preco', 'datavalidade','unidademedida','marca','actions'];
   dataSource = ELEMENT_DATA;
 
-  constructor() { }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
   }
-
+  openDialog(element: PeriodicElement | null ): void{
+      console.log("Fui clicado");
+      const dialogRef = this.dialog.open(ElementDialogComponent, {
+        width: '250px',
+        data: element === null?{
+          categoria: '',
+          descricao: '',
+          preco: '',
+          datavalidade: '',
+          unidademedida: '',
+          marca: ''
+        } : element
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if(result !== undefined){
+          this.dataSource.push(result);
+          this.table.renderRows();
+        }
+      });
+  }
+  pablo(){
+    console.log("o brabo!!!");
+  }
 }

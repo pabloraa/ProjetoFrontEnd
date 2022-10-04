@@ -1,1 +1,37 @@
-<p>element-dialog works!</p>
+<h1 mat-dialog-title>Cadastrar Produtos</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>CategoriaId</mat-label>
+    <input matInput [(ngModel)]="data.categoria">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Descricao</mat-label>
+    <input matInput [(ngModel)]="data.descricao">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Preco</mat-label>
+    <input matInput [(ngModel)]="data.preco">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>DatadeValidade</mat-label>
+    <input matInput [(ngModel)]="data.datavalidade">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>UnidadeDeMedida</mat-label>
+    <input matInput [(ngModel)]="data.unidademedida">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Marca</mat-label>
+    <input matInput [(ngModel)]="data.marca">
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Create</button>
+</div>
