@@ -41,17 +41,36 @@ export class ProdutosComponent implements OnInit {
           datavalidade: '',
           unidademedida: '',
           marca: ''
-        } : element
+        } : {
+          categoria : element.categoria,
+          descricao: element.descricao,
+          preco:element.preco,
+          datavalidade:element.datavalidade,
+          unidademedida:element.unidademedida,
+          marca: element.marca
+        }
       });
   
       dialogRef.afterClosed().subscribe(result => {
         if(result !== undefined){
-          this.dataSource.push(result);
-          this.table.renderRows();
+          if(this.dataSource.map(p=>p.categoria).includes(result.categoria)){
+            this.dataSource[result.categoria-1] = result;
+            this.table.renderRows();
+          }
+          else{
+            this.dataSource.push(result);
+            this.table.renderRows();
+          }
         }
       });
   }
   pablo(){
     console.log("o brabo!!!");
+  }
+  deleteElement(categoria:number):void{
+    this.dataSource = this.dataSource.filter(p => p.categoria !== categoria)
+  }
+  editElement(element:PeriodicElement):void{
+    this.openDialog(element);
   }
 }
